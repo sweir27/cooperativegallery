@@ -1,9 +1,15 @@
 # Django settings for cooperativegallery project.
 
 DEBUG = True
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CURRENT_PATH = os.path.abspath(os.path.dirname(__file__))
+SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
+
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
+    ('Sarah Weir', 'sweir27@gmail.com'),
     # ('Your Name', 'your_email@example.com'),
 )
 
@@ -11,8 +17,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': os.path.join(BASE_DIR, '..', 'db.sqlite3'),                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -72,6 +78,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(CURRENT_PATH, 'static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -83,7 +90,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'q1s1#3f-u@&j!4=-k_2%d2&le&^=)g9=a8gkm5c=!&#d(!8y4)'
+SECRET_KEY = 'spw@60k@iacx_e-9q6q&)l-+wyr9k!!ujt0il5$65ujxa3%&)-'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -111,6 +118,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(BASE_DIR, '..', 'templates'), 
 )
 
 INSTALLED_APPS = (
@@ -121,7 +129,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
+    'gallery_site',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )

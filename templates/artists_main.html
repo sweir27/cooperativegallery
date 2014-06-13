@@ -1,0 +1,56 @@
+<html>
+<!-- <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/basic.min.css"> -->
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/styles.css">
+<title>Cooperative Gallery 213</title>
+<body>
+<div id="headerbar">
+	<div id="home">
+		<a href='/'>Cooperative Gallery 213</a>
+	</div>
+	<div id="main_menu">
+		<span class="menu_item"><a href='/'>Home</a></span>
+		<span class="menu_item"><a href='/artists_main'>Artists</a></span>
+		<span class="menu_item"><a href='/calendar'>Calendar</a></span>
+		<span class="menu_item last_item"><a href='/contact'>Contact</a></span>
+	</div>
+</div>
+<div id="artist_page_wrapper">
+	<div id="sidebar_artist">
+		<ul id="artists_list">
+<!-- 			<li class="artist_name">John Smith</li>
+			<li class="artist_name">Joe Shmo</li>
+			<li class="artist_name">Ken Weir</li>
+			<li class="artist_name">Jordan Christopher Caroompas</li>
+			<li class="artist_name">John Singer Sargent</li> -->
+		</ul>
+	</div>
+	<div id="main_artist_content">
+		<div id="artist_title">
+<!-- 			John Smith
+ -->		</div>
+		<div id="artist_statement">
+<!-- 			Landscape, figure, and still life are timeless, universal, venerable motifs that compel regular and continued examination. I approach each subject with a history of memories, an awareness of my surroundings, and my psychological state at the moment.
+			Drawing is my first love and developing that skill forces me to explore a variety of relative techniques. I am seduced by the movement of form, the drama of unusual illumination, as well as the indifference of empty space. I covet line sensitivity and interesting textures. My compositional structures repeat themselves, as I struggle to create appropriate visual responses; and I turn to artists such as Rembrandt, Turner, Kollwitz, Hopper, Lebrun, and Dine for assistance, inspiration, and encouragement. -->
+		</div>
+		<div id="gallery">
+			<div id="controls"></div>
+			<div id="loading"></div>
+			<div id="slideshow"></div>
+			<div id="caption"></div>
+			<div id="thumbs"></div>
+	</div>
+</div>
+</body>
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="{{ STATIC_URL }}js/artists.js"></script>
+<script>
+
+	var am_json = JSON.stringify({{artists|safe}})
+
+	var am_first = JSON.parse(am_json);
+
+	console.log(am_first)
+</script>
+</html>

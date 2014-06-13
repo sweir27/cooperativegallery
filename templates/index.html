@@ -1,0 +1,44 @@
+<html>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/styles.css">
+<title>Cooperative Gallery 213</title>
+<body>
+<div id="headerbar">
+	<div id="home">
+		<a href='/'>Cooperative Gallery 213</a>
+	</div>
+	<div id="main_menu">
+		<span class="menu_item"><a href='/'>Home</a></span>
+		<span class="menu_item"><a href='/artists_main'>Artists</a></span>
+		<span class="menu_item"><a href='/calendar'>Calendar</a></span>
+		<span class="menu_item last_item"><a href='/contact'>Contact</a></span>
+	</div>
+</div>
+<div id="sidebar">
+
+</div>
+<div id="main_content">
+	<div id="show_info">
+		<div id="show_title">
+			<!-- John Singer Sargent Watercolors -->
+		</div>
+		<div id="show_description">
+<!-- 			“To live with Sargent’s water-colours is to live with sunshine captured and held,” according to the painter’s first biographer. Presenting more than 90 of Sargent’s dazzling works, this exhibition, co-organized with the Brooklyn Museum, combines for the first time the two most significant collections of watercolor paintings by John Singer Sargent (1856–1925), images created by a consummate artist with daring compositional strategies and a complex technique. “John Singer Sargent Watercolors” also celebrates a century of Sargent watercolors at the Museum of Fine Arts, Boston. -->
+		</div>
+	</div>
+	<div id="show_pic">
+		<img id="show_img" src="{{ STATIC_URL }}img/JSS_Mountain.JPG">
+	</div>
+</div>
+</body>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="{{ STATIC_URL }}js/home.js"></script>
+<script>
+
+	var mc_json = JSON.stringify({{content|safe}})
+
+	var mc_first = JSON.parse(mc_json);
+
+	console.log(mc_first)
+</script>
+</html>
