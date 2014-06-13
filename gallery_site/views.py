@@ -2,6 +2,7 @@ from django.shortcuts import render, render_to_response
 from django.template import RequestContext, loader
 from django.utils import simplejson
 from gallery_site.models import Artist, Artwork, MainContent
+from django.core.urlresolvers import reverse
 
 # Create your views here.
 
@@ -20,6 +21,8 @@ def index(request):
 	
 	#TODO check for none
 	recent_con = content[0]
+
+	print recent_con.title
 
 	return render(
 		request, 

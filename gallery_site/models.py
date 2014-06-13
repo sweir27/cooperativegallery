@@ -14,7 +14,7 @@ class Artist(models.Model):
 
 class Artwork(models.Model):
 	artist = models.ForeignKey(Artist)
-	picture = models.FileField(upload_to = 'artists/%Y.%m.%d.%H.%M.%S', blank=True)
+	picture = models.FileField(upload_to = 'artists/%Y/%m/%d/%h/%m/%s', blank=True)
 	description = models.TextField(null=True, blank=True)
 	added_at = models.DateTimeField(auto_now_add=True)
 
