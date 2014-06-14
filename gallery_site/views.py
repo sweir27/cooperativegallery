@@ -1,8 +1,9 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, get_object_or_404
 from django.template import RequestContext, loader
 from django.utils import simplejson
-from gallery_site.models import Artist, Artwork, MainContent
+from gallery_site.models import Artist, Artwork, MainContent, BenoitImage, BenoitImageForm
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -52,4 +53,21 @@ def artists_main(request):
 # def artist(request):
 # 	return render_to_response('artists_main.html', locals(), context_instance = RequestContext(request))
 
+def upload_benoit_image(request):
+    if request.method == 'POST':
+        form = BenoitImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_benoit_image = form.save()
+            return HttpResponse('the file was uploaded on your drive at %s and was save in your database under the title %s' % (new_benoit_image.image.url,new_benoit_image.title))
+    else:
+        form = BenoitImageForm()
+    return render(request, 'upload_benoit_image.html', {'form': form})
 
+def ajax_get_benoit_image(request):
+    title = request.POST.get('title')
+    benoit_image = get_object_or_404(BenoitImage, title=title)
+    response = { 'title': benoit_image.title, 'size': benoit_image.image.size, 'url': benoit_image.image.url }
+    return HttpResponse(simplejson.dumps(response))
+
+def get_benoit_image(request):
+    return render(request, 'get_benoit_image.html')
