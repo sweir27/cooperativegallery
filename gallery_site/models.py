@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import simplejson
+from django.forms import ModelForm
 
 # Create your models here.
 class Artist(models.Model):
@@ -26,6 +27,15 @@ class MainContent(models.Model):
 
 	def toJSON(self):
 		return simplejson.dumps(self, default=dthandler, sort_keys=True)
+
+class BenoitImage(models.Model):
+	title = models.CharField(max_length = 200)
+	image = models.FileField(upload_to = 'benoit_images')
+
+class BenoitImageForm(ModelForm):
+	class Meta:
+		model = BenoitImage
+		fields = ['title','image']
 
 def dthandler(obj):
     # lambda obj: obj.isoformat() if isinstance(obj, datetime.datetime) else obj.__dict__
