@@ -6,24 +6,34 @@ from django.forms import ModelForm
 class Artist(models.Model):
 	name = models.CharField(max_length = 200)
 	website = models.URLField(max_length = 200, null=True, blank=True)
-	profile_pic = models.FileField(upload_to = 'profile_pics/', blank=True)
+	profile_pic = models.FileField(upload_to = 'profile_pics', blank=True)
 	biography = models.TextField(null=True, blank=True)
 	added_at = models.DateTimeField(auto_now_add=True)
+
+	def __unicode__(self):
+		return self.name
 
 	def toJSON(self):
 		return simplejson.dumps(self, default=dthandler, sort_keys=True)
 
 class Artwork(models.Model):
 	artist = models.ForeignKey(Artist)
-	picture = models.FileField(upload_to = 'artists/%Y/%m/%d/%h/%m/%s', blank=True)
+	image = models.FileField(upload_to = 'artists', null=True)
+	title = models.CharField(max_length = 200, blank=True, null=True)
 	description = models.TextField(null=True, blank=True)
 	added_at = models.DateTimeField(auto_now_add=True)
+
+	def __unicode__(self):
+		return self.title
 
 class MainContent(models.Model):
 	title = models.CharField(max_length = 200)
 	description = models.TextField()
-	picture = models.FileField(upload_to = 'mainpage/')
+	picture = models.FileField(upload_to = 'mainpage')
 	added_at = models.DateTimeField(auto_now_add=True)
+
+	def __unicode__(self):
+		return self.title
 
 	def toJSON(self):
 		return simplejson.dumps(self, default=dthandler, sort_keys=True)
@@ -36,6 +46,11 @@ class BenoitImageForm(ModelForm):
 	class Meta:
 		model = BenoitImage
 		fields = ['title','image']
+
+# class ArtworkForm(ModelForm):
+# 	class Meta:
+# 		model = Artwork
+# 		fields = ['artist','image','title','description']
 
 def dthandler(obj):
     # lambda obj: obj.isoformat() if isinstance(obj, datetime.datetime) else obj.__dict__

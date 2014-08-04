@@ -71,3 +71,13 @@ def ajax_get_benoit_image(request):
 
 def get_benoit_image(request):
     return render(request, 'get_benoit_image.html')
+
+# def artist_upload_image(request):
+#     if request.method == 'POST':
+#         form = ArtworkForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             new_image = form.save()
+#             return HttpResponse('the file was uploaded on your drive at %s and was save in your database under the title %s' % (new_image.image.url,new_image.title))
+#     else:
+#         form = ArtworkForm()
+#     return render(request, 'artist_upload_image.html', {'form': form})

@@ -69,10 +69,11 @@ a:hover {
 #show_title {
 	padding-bottom: 15px;
 	font-size: 25px;
+	padding-left: 20px;
 }
 
 #show_description {
-
+	padding-left: 20px;
 }
 
 #show_pic {
@@ -131,4 +132,10 @@ a:hover {
 	/*position: fixed;*/
 	float: left;
 	width: 600px;
+}
+
+#main_page_title {
+	font-size: 20pt;
+	color: #7e7e7e;
+	margin-bottom: 15px;
 }
