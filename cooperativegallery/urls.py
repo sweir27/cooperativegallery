@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^get_benoit_image/', 'gallery_site.views.get_benoit_image'),
 
     # url(r'^artist_upload_image/', 'gallery_site.views.artist_upload_image'),
+    url(r'^ajax_get_artist_image/', 'gallery_site.views.ajax_get_artist_image'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

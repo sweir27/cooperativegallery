@@ -30,7 +30,6 @@ def index(request):
 		"index.html",
 		{
 			'content': model_to_json([recent_con])
-			# 'content':'hello!'
 		}
 	)
 
@@ -66,11 +65,31 @@ def upload_benoit_image(request):
 def ajax_get_benoit_image(request):
     title = request.POST.get('title')
     benoit_image = get_object_or_404(BenoitImage, title=title)
+    print benoit_image.image.url
     response = { 'title': benoit_image.title, 'size': benoit_image.image.size, 'url': benoit_image.image.url }
     return HttpResponse(simplejson.dumps(response))
 
 def get_benoit_image(request):
     return render(request, 'get_benoit_image.html')
+
+def ajax_get_artist_image(request):
+	print 'HERE'
+	name = request.POST['name']
+	print name
+	artist = Artist.objects.filter(name=name)
+	print artist
+
+	artwork = Artwork.objects.filter(artist=artist)
+	print artwork
+
+	# if (len(artwork) > 0):
+		# print artwork[2].image
+	response={
+		'name':name, 
+		'artist':model_to_json(artist), 
+		'artwork':model_to_json(artwork),
+	}
+	return HttpResponse(simplejson.dumps(response), mimetype='application/json')
 
 # def artist_upload_image(request):
 #     if request.method == 'POST':

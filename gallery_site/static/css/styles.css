@@ -139,3 +139,12 @@ a:hover {
 	color: #7e7e7e;
 	margin-bottom: 15px;
 }
+
+.artist_name:hover {
+	color: gray;
+	cursor: hand;
+}
+
+.test_img {
+	width: 500px;
+}

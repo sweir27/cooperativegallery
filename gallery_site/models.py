@@ -12,7 +12,6 @@ class Artist(models.Model):
 
 	def __unicode__(self):
 		return self.name
-
 	def toJSON(self):
 		return simplejson.dumps(self, default=dthandler, sort_keys=True)
 
@@ -25,6 +24,8 @@ class Artwork(models.Model):
 
 	def __unicode__(self):
 		return self.title
+	def toJSON(self):
+		return simplejson.dumps(self, default=dthandler, sort_keys=True)
 
 class MainContent(models.Model):
 	title = models.CharField(max_length = 200)
@@ -34,7 +35,6 @@ class MainContent(models.Model):
 
 	def __unicode__(self):
 		return self.title
-
 	def toJSON(self):
 		return simplejson.dumps(self, default=dthandler, sort_keys=True)
 
