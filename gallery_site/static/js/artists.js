@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$("#main_artist_content").hide();
 	display_main_artists();
-	display_first_artist();
+	// display_first_artist();
 	generate_first_images();
 	enableEvents();
 });
@@ -10,8 +10,10 @@ function display_main_artists() {
 	for (a in am_first) {
 		var name = am_first[a].name;
 		var biography = am_first[a].biography;
+		var statement = am_first[a].artist_statement;
+		var id = am_first[a].id;
 
-		var artist_el = "<li class='artist_name'><div class='artist_link'>"+name+"</div></li>";
+		var artist_el = "<li class='artist_name' id='name_"+id+"'><div class='artist_link'>"+name+"</div></li>";
 		$("#artists_list").append(artist_el);
 	}
 }
@@ -19,8 +21,10 @@ function display_main_artists() {
 function display_first_artist() {
 	var first_name = am_first[0].name;
 	var first_bio = am_first[0].biography;
+	var first_statement = am_first[0].artist_statement;
 	$("#artist_title").html(first_name);
-	$("#artist_statement").html(first_bio);
+	$("#artist_statement").html(first_statement);
+	$("#biography").html(first_bio);
 }
 
 function generate_first_images() {
@@ -33,7 +37,10 @@ function generate_first_images() {
     			if (typeof artwork[a].image != 'object') {
     				var url = '/media/'+artwork[a].image
     				var artist_id = artwork[a].artist_id
-    				$("#all_artists").append("<div class='nailthumb-container square-thumb-larger all-thumbs' id='artist_"+artist_id+"'><img class='test_img' src='"+url+"'><div class='name-thumb' id='gray_artist_"+artist_id+"'>"+artist+"</div></img></div>")
+    				$("#all_artists").append("<div class='nailthumb-container square-thumb-larger all-thumbs'"+ 
+    					"id='artist_"+artist_id+"'><img class='test_img' src='"+url+"'>"+
+    					"<div class='name-thumb' id='gray_artist_"+artist_id+"'>"+artist+
+    					"</div></img></div>")
 
     				break
     			}
@@ -44,64 +51,120 @@ function generate_first_images() {
 	$('.nailthumb-container').nailthumb({replaceAnimation:null});
 }
 
+function clickArtist(link) {
+	$(".artist_name").css('color', 'black')
+	$(link).css('color', 'gray')
+	$("#all_artists").hide();
+	$("#main_artist_content").show();
+	var artist_name = $('> .artist_link', link).text();
+	$("#artist_title").html('');
+	$("#artist_title").html(artist_name);
+	$("#artist_statement").html('');
+	$(".thumbnails").html('');
+	$(".main_pic_wrapper").html('');
+	$("#statement_title").show();
+	$("#bio_title").show();
+	$.ajax({
+        url: "/ajax_get_artist_image/",
+        type: "POST",
+        data: { 
+        	name: artist_name,
+        	csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value 
+        },
+        success: function(data) {
+        	var artist = JSON.parse(data["artist"])
+        	if (typeof artist[0].artist_statement != 'object') {
+        		$("#artist_statement").html(artist[0].artist_statement);
+        	} else {
+        		$("#statement_title").hide();
+        	}
+
+        	if (typeof artist[0].biography != 'object') {
+        		$("#biography").html(artist[0].biography);
+        	} else {
+        		$("#bio_title").hide();
+        	}
+
+        	var artwork = JSON.parse(data["artwork"])
+        	if (artwork.length > 0) {
+        		for (var a in artwork) {
+        			if (typeof artwork[a].image != 'object') {
+        				var url = '/media/'+artwork[a].image
+        				var artwork_id = artwork[a].id
+        				$(".thumbnails").append("<div class='nailthumb-container square-thumb ind-thumbs'>"+
+        					"<img class='ind_img' id='thumb_id_"+artwork_id+"' src='"+url+"'></img></div>")
+        			}
+        		}
+        	}
+
+        	//generate first main picture
+        	if (artwork.length > 0) {
+	    		for (var a in artwork) {
+	    			if (typeof artwork[a].image != 'object') {
+	    				var url = '/media/'+artwork[a].image
+	    				var artist_id = artwork[a].artist_id
+	    				var artwork_id = artwork[a].id
+	    				$(".main_pic_wrapper").append("<div class='main_pic' id='main_art_"+artwork_id+"'><img class='main_img' src='"+url+"'></img></div>")
+
+	    				break
+	    			}
+	    		}
+	    	}
+
+        	$('.nailthumb-container').nailthumb({replaceAnimation:null});
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+	        // console.log(jqXHR.responseText);
+	        // console.log(errorThrown)
+	    }
+    });
+}
+
+function changeMainPic(artwork_id) {
+	var artist = $("#artist_title").html()
+	artwork = JSON.parse(am_artwork[artist])
+	$(".main_pic_wrapper").html('')
+	// console.log('pre artwork id '+artwork_id)
+	for (var a in artwork) {
+		// console.log('artwork '+artwork[a].id)
+		if (artwork[a].id == artwork_id) {
+			var url = '/media/'+artwork[a].image
+			var artist_id = artwork[a].artist_id
+			$(".main_pic_wrapper").append("<div class='main_pic' id='main_art_"+artwork_id+
+				"'><img class='main_img' src='"+url+"'></img></div>")
+		}
+	}
+	
+}
+
 function enableEvents() {
 
 	$("body").on('click', '.artist_name', function(e) {
-		$(".artist_name").css('color', 'black')
-		$(this).css('color', 'gray')
-		$("#all_artists").hide();
-		$("#main_artist_content").show();
-		var artist_name = $('> .artist_link', this).text();
-		$("#artist_title").html('');
-		$("#artist_title").html(artist_name);
-		$("#artist_statement").html('');
-		$(".thumbnails").html('');
-		$.ajax({
-	        url: "/ajax_get_artist_image/",
-	        type: "POST",
-	        data: { 
-	        	name: artist_name,
-	        	csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value 
-	        },
-	        success: function(data) {
-	        	var artist = JSON.parse(data["artist"])
-	        	$("#artist_statement").html(artist[0].biography);
-
-	        	var artwork = JSON.parse(data["artwork"])
-	        	if (artwork.length > 0) {
-	        		for (var a in artwork) {
-	        			if (typeof artwork[a].image != 'object') {
-	        				var url = '/media/'+artwork[a].image
-	        				$(".thumbnails").append("<div class='nailthumb-container square-thumb ind-thumbs'><img class='test_img' src='"+url+"'></img></div>")
-	        			}
-	        		}
-	        	}
-
-	        	$('.nailthumb-container').nailthumb({replaceAnimation:null});
-	        },
-	        error: function (jqXHR, textStatus, errorThrown) {
-		        // console.log(jqXHR.responseText);
-		        // console.log(errorThrown)
-		    }
-	    });
+		console.log(this)
+		clickArtist(this);
 	});
 
-// $("body").on('mouseenter','.test_img', function(e) {
-// 	console.log(this)
-// 	var artist_id = 'gray_'+ $($(this).parent()).attr("id")
-// 	// $('#'+artist_id).show();
-// 	$(this).hide();
-// });
-
 	$(".test_img").mouseenter(function(){
-		console.log("clicked")
 		$(this).toggle();
 	});
 
-	// $(".test_img").mouseleave(function(){
-	// 	console.log("out")
-	// 	$(this).show();
-	// });
+	//Does nothing right now... but maybe later when the hover thing is fixed
+	$("body").on('click', '.test_img', function(e) {
+		var id = $(this).attr('id').split('gray_artist_')[1]
+		var el = $('#name_'+id);
+		clickArtist(el)
+	});
+
+	$("body").on('click', '.name-thumb', function(e) {
+		var id = $(this).attr('id').split('gray_artist_')[1]
+		var el = $('#name_'+id);
+		clickArtist(el)
+	});
+
+	$("body").on('click', '.ind_img', function(e) {
+		var artwork_id = $(this).attr('id').split('thumb_id_')[1]
+		changeMainPic(artwork_id)
+	});
 
 }
 

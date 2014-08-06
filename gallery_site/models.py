@@ -8,6 +8,7 @@ class Artist(models.Model):
 	website = models.URLField(max_length = 200, null=True, blank=True)
 	profile_pic = models.FileField(upload_to = 'profile_pics', blank=True)
 	biography = models.TextField(null=True, blank=True)
+	artist_statement = models.TextField(null=True, blank=True)
 	added_at = models.DateTimeField(auto_now_add=True)
 
 	def __unicode__(self):
