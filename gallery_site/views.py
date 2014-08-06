@@ -41,11 +41,25 @@ def contact(request):
 
 def artists_main(request):
 	artists = Artist.objects.all().order_by('name')
+	artwork = {}
+	for a in artists:
+		#Add in functionality if artwork is deselected
+		art = Artwork.objects.filter(artist=a)
+		artwork[a.name] = model_to_json(art)
+
+	print artwork
+
+	# response = {
+		# 	'artists': model_to_json(artists),
+		# 	'artwork': artwork
+		# }
+
 	return render(
 		request, 
 		"artists_main.html",
 		{
-			'artists': model_to_json(artists)
+			'artists': model_to_json(artists),
+			'artwork': simplejson.dumps([artwork])
 		}
 	)
 

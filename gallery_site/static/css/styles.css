@@ -124,7 +124,7 @@ a:hover {
 	margin-top: 50px;
 }
 
-#main_artist_content {
+.right {
 	
 	/*float: right;*/
 	/*margin-left: 250px;*/
@@ -146,5 +146,48 @@ a:hover {
 }
 
 .test_img {
-	width: 500px;
+	/*width: 500px;*/
+	z-index: 2;
+}
+
+.square-thumb {
+    width: 100px;
+    height: 100px;
+}
+
+.square-thumb-larger {
+    width: 150px;
+    height: 150px;
+}
+
+.thumbnails {
+	margin-top: 20px;
+}
+
+.nailthumb-container {
+	position: relative;
+	float: left;
+	margin-right: 10px;
+}
+
+.all-thumbs:hover {
+	cursor: pointer;
+}
+
+.name-thumb {
+	/*display:none;*/
+	background-color:gray;
+	width: 150px;
+	height: 150px;
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+	float: left;
+	margin-right: 10px;
+	z-index:1;
+	overflow:hidden;
+}
+
+.name-thumb:hover {
+	cursor: pointer;
 }
