@@ -34,9 +34,14 @@ def index(request):
 	)
 
 def contact(request):
+	artists = Artist.objects.all().order_by('name')
+
 	return render(
 		request, 
-		"contact.html"
+		"contact.html",
+		{
+			'artists': model_to_json(artists),
+		}
 	)
 
 def artists_main(request):

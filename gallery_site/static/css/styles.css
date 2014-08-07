@@ -6,6 +6,10 @@ body {
   
 }
 
+* {
+	margin: 0;
+}
+
 #headerbar {
 
 }
@@ -68,11 +72,11 @@ a:hover {
 #show_title {
 	padding-bottom: 15px;
 	font-size: 25px;
-	padding-left: 20px;
+	/*padding-left: 20px;*/
 }
 
 #show_description {
-	padding-left: 20px;
+	/*padding-left: 20px;*/
 }
 
 #show_pic {
@@ -100,6 +104,22 @@ a:hover {
 	margin-top: 100px;
 }
 
+#about_content {
+	margin-left: 200px;
+	/*margin-top: 100px;*/
+}
+
+.about_section {
+	font-size: 14pt;
+	/*margin-top: 40px;*/
+	margin-bottom: 20px;
+	color: #B03060;
+}
+
+.about_subsection {
+	margin-bottom: 20px;
+}
+
 #artists_list {
 	list-style-type: none;
 	padding-left: 0px;
@@ -108,6 +128,7 @@ a:hover {
 .artist_name {
 	padding-left: 1.5em;
     text-indent:-1.5em;
+    padding-bottom: 5px;
 }
 
 #artist_title {
@@ -140,14 +161,19 @@ a:hover {
 }
 
 #main_page_title {
-	font-size: 20pt;
-	color: #7e7e7e;
+	font-size: 14pt;
+	/*color: #7e7e7e;*/
+	color: #B03060;
 	margin-bottom: 15px;
 }
 
 .artist_name:hover {
-	color: gray;
+	/*color: gray;*/
 	cursor: hand;
+}
+
+.artist_link:hover {
+	color: gray;
 }
 
 .test_img {
@@ -222,9 +248,7 @@ a:hover {
 	/*margin-top: 20px;*/
 }
 
-* {
-	margin: 0;
-}
+
 html, body {
 	height: 100%;
 }
@@ -266,7 +290,15 @@ html, body {
 
 .section_title {
 	font-size: 14pt;
-	margin-top: 40px;
-	margin-bottom: 20px;
+	margin-top: 30px;
+	margin-bottom: 15px;
+	color: #B03060;
+}
+
+#website_link {
+	font-size: 12pt;
+}
+
+.selected_link {
 	color: #B03060;
 }

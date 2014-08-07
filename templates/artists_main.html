@@ -4,6 +4,7 @@
 <!-- <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/basic.min.css"> -->
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.nailthumb.1.1.css">
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/styles.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/slimbox2.css">
 <title>Cooperative Gallery 213</title>
 <body>
 <div class="wrapper">
@@ -12,10 +13,10 @@
 		<a href='/'>Cooperative Gallery 213</a>
 	</div>
 	<div id="main_menu">
-		<span class="menu_item"><a href='/'>Home</a></span>
-		<span class="menu_item"><a href='/artists_main'>Artists</a></span>
+		<span class="menu_item"><a class='selected_link' href='/artists_main'>Artists</a></span>
 		<span class="menu_item"><a href='/calendar'>Calendar</a></span>
-		<span class="menu_item last_item"><a href='/contact'>Contact</a></span>
+		<span class="menu_item"><a href='/membership'>Membership</a></span>
+		<span class="menu_item last_item"><a href='/contact'>About</a></span>
 	</div>
 </div>
 <div id="artist_page_wrapper">
@@ -28,6 +29,9 @@
 	</div>
 	<div id="main_artist_content" class="right">
 		<div id="artist_title">
+		</div>
+		<div id="website">
+
 		</div>
 		<div class="section_title" id="bio_title">
 			Biography
@@ -42,7 +46,7 @@
 		<div class="section_title">
 			Artwork
 		</div>
-		<div class="main_pic_wrapper"></div>
+		<!-- <div class="main_pic_wrapper"></div> -->
 		<div class="thumbnails"></div>
 	</div>
 </div>
@@ -76,7 +80,8 @@
 			Contact
 		</div>
 		<div class='footer_text'>
-			(607) 724-3462
+			(607) 724-3462<br>
+			<a href="mailto:info@cooperativegallery.com">info@cooperativegallery.com</a>
 		</div>
 	</div>
 </div>
@@ -86,6 +91,8 @@
 <script src="{{ STATIC_URL }}js/jquery.nailthumb.1.1.js"></script>
 <script src="{{ STATIC_URL }}js/jquery.hoverintent.js"></script>
 <script src="{{ STATIC_URL }}js/artists.js"></script>
+<script src="{{ STATIC_URL }}js/sidebar.js"></script>
+<script src="{{ STATIC_URL }}js/slimbox2.js"></script>
 <script>
 
 	var am_json = JSON.stringify({{artists|safe}});

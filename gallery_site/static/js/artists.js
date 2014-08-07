@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$("#main_artist_content").hide();
-	display_main_artists();
+	// display_main_artists();
 	// display_first_artist();
 	generate_first_images();
 	enableEvents();
@@ -53,17 +53,20 @@ function generate_first_images() {
 
 function clickArtist(link) {
 	$(".artist_name").css('color', 'black')
-	$(link).css('color', 'gray')
+	$(link).css('color', '#B03060')
 	$("#all_artists").hide();
 	$("#main_artist_content").show();
 	var artist_name = $('> .artist_link', link).text();
 	$("#artist_title").html('');
 	$("#artist_title").html(artist_name);
+	$("#website").html('');
 	$("#artist_statement").html('');
 	$(".thumbnails").html('');
 	$(".main_pic_wrapper").html('');
 	$("#statement_title").show();
 	$("#bio_title").show();
+	$("#website").show();
+
 	$.ajax({
         url: "/ajax_get_artist_image/",
         type: "POST",
@@ -73,6 +76,7 @@ function clickArtist(link) {
         },
         success: function(data) {
         	var artist = JSON.parse(data["artist"])
+        	var website = artist[0].website
         	if (typeof artist[0].artist_statement != 'object') {
         		$("#artist_statement").html(artist[0].artist_statement);
         	} else {
@@ -85,6 +89,13 @@ function clickArtist(link) {
         		$("#bio_title").hide();
         	}
 
+        	if (typeof website != 'object') {
+        		$("#website").append("<a id='website_link' href='"+website+"'>"+website+"</a>");
+        	} else {
+        		$("#website").hide();
+        	}
+
+        	//generate thumbnails
         	var artwork = JSON.parse(data["artwork"])
         	if (artwork.length > 0) {
         		for (var a in artwork) {
@@ -112,6 +123,26 @@ function clickArtist(link) {
 	    	}
 
         	$('.nailthumb-container').nailthumb({replaceAnimation:null});
+
+        	//wrap each image with a link to enable the slideshow
+        	$('img.ind_img').each(function(){
+	            var artwork_id = $(this).attr('id').split('thumb_id_')[1]
+	            for (var a in artwork) {
+	            	if (artwork[a].id == artwork_id) {
+						// var url = '/media/'+artwork[a].image
+						// var artist_id = artwork[a].artist_id
+						var title = artwork[a].title
+					}
+	            }
+	            $(this).wrap('<a href="'  + $(this).attr('src') +
+                  '" title="' + title +
+                  '" rel=lightbox_show></a>');
+	        });
+
+        	//enable slideshow
+	        $("a[rel^='lightbox']").slimbox({
+	        	// loop: true,
+	        }); 
         },
         error: function (jqXHR, textStatus, errorThrown) {
 	        // console.log(jqXHR.responseText);

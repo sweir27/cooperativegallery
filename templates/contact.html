@@ -8,16 +8,43 @@
 		<a href='/'>Cooperative Gallery 213</a>
 	</div>
 	<div id="main_menu">
-		<span class="menu_item"><a href='/'>Home</a></span>
 		<span class="menu_item"><a href='/artists_main'>Artists</a></span>
 		<span class="menu_item"><a href='/calendar'>Calendar</a></span>
-		<span class="menu_item last_item"><a href='/contact'>Contact</a></span>
+		<span class="menu_item"><a href='/membership'>Membership</a></span>
+		<span class="menu_item last_item"><a class='selected_link' href='/contact'>About</a></span>
 	</div>
 </div>
 <div id="sidebar">
-
+	<!-- <ul id="artists_list"> -->
+	<!-- </ul> -->
 </div>
-<div id="contact_content">
+<div id="about_content" class='right'>
+	<div class="about_section">
+		About
+	</div>
+	<div class="about_subsection">
+		The Cooperative Gallery 213 has been a pioneering presence on State Street, now the hub of the arts renaissance in Binghamton. Cooperative Gallery 213 is a popular stop on the highly successful First Friday Art Walks which occur monthly from 3 to 9 pm. The gallery is open every Friday 3-6 pm, every Saturday noon-4 pm and by appointment with the featured artist or any member. 
+	</div>
+	<div class="about_section">
+		Directions
+	</div>
+	<div class="about_subsection">
+		From Interstate 81 South: Take Exit 4S to the Brandywine Hwy. Take the Robinson Street exit, continue straight to Henry Street. Turn right on Henry Street and follow to State Street. Turn right onto State Street. Cooperative Gallery 213 is about halfway down the block on the left side of the street. 
+	</div>
+	<div class="about_subsection">
+		From Route 17 East: Take the Front Street exit. Turn right onto Front Street and follow to Clinton St. Turn left onto Clinton Street, then turn right onto Water Street. Turn left onto Henry Street, go two blocks and turn left onto State Street. 
+	</div>
+	<div class="about_subsection">
+		From Interstate 88 West: Take Exit 1 (Brandywine Hwy), then take the Robinson Street exit. Continue straight to Henry Street. Turn right on Henry Street and follow to State Street. Turn right on State Street. 
+	</div>
+	<div class="about_subsection">
+		From Route 17 West/81 North: Take Exit 4S to the Brandywine Hwy. Take the Robinson Street exit and continue straight to Henry Street. Turn right on Henry Street and follow to State Street. Turn right on State Street. 
+	</div>
+	<div class="about_subsection">
+		From Route 434/Vestal Parkway: Follow Route 434 east into Binghamton. It turns into State Street.
+	</div>
+</div>
+<!-- <div id="contact_content">
 	<div class="contact_info">Cooperative Gallery 213</div>
 	<div class="contact_info">213 State Street</div>
 	<div class="contact_info">Binghamton, New York 1390</div>
@@ -27,7 +54,7 @@
 	<div class="contact_info">Fridays 3-6 p.m.</div>
 	<div class="contact_info">First Fridays 3-9 p.m.</div>
 	<div class="contact_info">Saturdays 12-4 p.m.</div>
-</div>
+</div> -->
 <div class='push'></div>
 </div>
 <div class="footer">
@@ -62,4 +89,15 @@
 	</div>
 </div>
 </body>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<!-- <script src="{{ STATIC_URL }}js/sidebar.js"></script> -->
+<script>
+
+	var am_json = JSON.stringify({{artists|safe}});
+
+	var am_first = JSON.parse(am_json);
+
+	console.log(am_first)
+</script>
 </html>
