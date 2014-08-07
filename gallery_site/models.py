@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import simplejson
 from django.forms import ModelForm
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Artist(models.Model):
@@ -10,6 +11,7 @@ class Artist(models.Model):
 	biography = models.TextField(null=True, blank=True)
 	artist_statement = models.TextField(null=True, blank=True)
 	added_at = models.DateTimeField(auto_now_add=True)
+	owner = models.ForeignKey(User, default=1, null=True)
 
 	def __unicode__(self):
 		return self.name
@@ -20,7 +22,7 @@ class Artwork(models.Model):
 	artist = models.ForeignKey(Artist)
 	image = models.FileField(upload_to = 'artists', null=True)
 	title = models.CharField(max_length = 200, blank=True, null=True)
-	description = models.TextField(null=True, blank=True)
+	# description = models.TextField(null=True, blank=True)
 	added_at = models.DateTimeField(auto_now_add=True)
 
 	def __unicode__(self):

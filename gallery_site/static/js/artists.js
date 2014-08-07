@@ -179,6 +179,11 @@ function enableEvents() {
 		$(this).toggle();
 	});
 
+	$(".name-thumb").mouseenter(function(){
+		// $(this).toggle();
+		console.log($(this).parent())
+	});
+
 	//Does nothing right now... but maybe later when the hover thing is fixed
 	$("body").on('click', '.test_img', function(e) {
 		var id = $(this).attr('id').split('gray_artist_')[1]
