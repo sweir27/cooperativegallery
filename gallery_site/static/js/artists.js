@@ -37,7 +37,7 @@ function generate_first_images() {
     			if (typeof artwork[a].image != 'object') {
     				var url = '/media/'+artwork[a].image
     				var artist_id = artwork[a].artist_id
-    				$("#all_artists").append("<div class='nailthumb-container square-thumb-larger all-thumbs'"+ 
+    				$("#all_artists").append("<div class='nailthumb-container square-thumb-larger all-thumbs artist-image-thumb'"+ 
     					"id='artist_"+artist_id+"'><img class='test_img' src='"+url+"'>"+
     					"<div class='name-thumb' id='gray_artist_"+artist_id+"'>"+artist+
     					"</div></img></div>")
@@ -175,8 +175,16 @@ function enableEvents() {
 		clickArtist(this);
 	});
 
+	$(".artist-image-thumb").hover(
+		function(){
+			$(this).find('.test_img').hide();
+		},
+		function(){
+			$(this).find('.test_img').show();
+	});
+
 	$(".test_img").mouseenter(function(){
-		$(this).toggle();
+		//$(this).toggle();
 	});
 
 	$(".name-thumb").mouseenter(function(){
