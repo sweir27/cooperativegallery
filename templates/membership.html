@@ -10,8 +10,8 @@
 	</div>
 	<div id="main_menu">
 		<span class="menu_item"><a href='/artists_main'>Artists</a></span>
-		<span class="menu_item"><a class='selected_link' href='/calendar'>Calendar</a></span>
-		<span class="menu_item"><a href='/membership'>Membership</a></span>
+		<span class="menu_item"><a href='/calendar'>Calendar</a></span>
+		<span class="menu_item"><a class='selected_link' href='/membership'>Membership</a></span>
 		<span class="menu_item"><a href='/links'>Related Links</a></span>
 		<span class="menu_item last_item"><a href='/contact'>About</a></span>
 	</div>
@@ -20,7 +20,21 @@
 	<!-- <ul id="artists_list"> -->
 	<!-- </ul> -->
 </div>
-<SCRIPT src="http://www.localendar.com/public/coop213?include=Y&dynamic=Y&style=M0"></SCRIPT>
+<div id="about_content" class='right'>
+	<div class="about_section">
+		Cooperative Gallery 213 Membership
+	</div>
+	<div class="about_subsection">
+		Here is some information about what it means to be a member of the cooperative gallery.
+	</div>
+	<div class="about_section">
+		Become a member
+	</div>
+	<div class="about_subsection">
+		If you would like to become a member, please fill out this interest form. What is the point of this page actually? For new people trying to become members? Or for people trying to renew their membership fees?
+	</div>
+
+</div>
 <div class='push'></div>
 </div>
 </div>
@@ -63,5 +77,10 @@
 <!-- <script src="{{ STATIC_URL }}js/sidebar.js"></script> -->
 <script>
 
+	var am_json = JSON.stringify({{artists|safe}});
+
+	var am_first = JSON.parse(am_json);
+
+	console.log(am_first)
 </script>
 </html>

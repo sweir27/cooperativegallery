@@ -13,6 +13,9 @@ urlpatterns = patterns('',
     
     url(r'^$', 'gallery_site.views.index'),
     url(r'^contact/', 'gallery_site.views.contact'),
+    url(r'^calendar/', 'gallery_site.views.calendar'),
+    url(r'^membership/', 'gallery_site.views.membership'),
+    url(r'^links/', 'gallery_site.views.links'),
     url(r'^artists_main/', 'gallery_site.views.artists_main'),
 
     url(r'^upload_benoit_image/', 'gallery_site.views.upload_benoit_image'),

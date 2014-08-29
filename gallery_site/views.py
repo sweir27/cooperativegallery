@@ -44,6 +44,36 @@ def contact(request):
 		}
 	)
 
+def calendar(request):
+
+	return render(
+		request, 
+		"calendar.html",
+		{
+			# 'artists': model_to_json(artists),
+		}
+	)
+
+def membership(request):
+
+	return render(
+		request, 
+		"membership.html",
+		{
+			# 'artists': model_to_json(artists),
+		}
+	)
+
+def links(request):
+
+	return render(
+		request, 
+		"links.html",
+		{
+			# 'artists': model_to_json(artists),
+		}
+	)
+
 def artists_main(request):
 	artists = Artist.objects.all().order_by('name')
 	artwork = {}

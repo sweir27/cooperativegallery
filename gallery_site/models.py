@@ -32,8 +32,15 @@ class Artwork(models.Model):
 
 class MainContent(models.Model):
 	title = models.CharField(max_length = 200)
+	artists = models.CharField(max_length = 200, help_text="Input one or more artists with commas in between (i.e. 'Joe Shmo, John Smith')")
 	description = models.TextField()
-	picture = models.FileField(upload_to = 'mainpage')
+	image_1 = models.FileField(upload_to = 'mainpage', null=True)
+	image_2 = models.FileField(upload_to = 'mainpage', null=True, blank=True)
+	show_start = models.DateField()
+	show_end = models.DateField()
+	thursday_title = models.CharField(max_length = 200, help_text="(Optional)", null=True, blank=True)
+	thursday_description = models.TextField(help_text="(Optional)", null=True, blank=True)
+	thursday_time = models.DateTimeField(null=True, blank=True, help_text='(Optional)')
 	added_at = models.DateTimeField(auto_now_add=True)
 
 	def __unicode__(self):
@@ -49,6 +56,12 @@ class BenoitImageForm(ModelForm):
 	class Meta:
 		model = BenoitImage
 		fields = ['title','image']
+
+class Migration:
+
+    def forwards(self, orm):
+        # Rename 'name' field to 'full_name'
+        db.rename_column('gallery_site_maincontent', 'name', 'full_name')
 
 # class ArtworkForm(ModelForm):
 # 	class Meta:

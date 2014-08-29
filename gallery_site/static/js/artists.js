@@ -178,9 +178,11 @@ function enableEvents() {
 	$(".artist-image-thumb").hover(
 		function(){
 			$(this).find('.test_img').hide();
+			// $(this).find('.name-thumb').show();
 		},
 		function(){
 			$(this).find('.test_img').show();
+			// $(this).find('.name-thumb').hide();
 	});
 
 	$(".test_img").mouseenter(function(){
